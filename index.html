@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Educación Online — Mapa mental U2A1</title>
+  <style>
+    :root {
+      --bg: #f6f4ef;
+      --surface: #ffffff;
+      --ink: #141414;
+      --muted: #5c5c5c;
+      --border: rgba(20, 20, 20, 0.14);
+      --shadow: 0 12px 30px rgba(20, 20, 20, 0.08);
+      --radius: 16px;
+      --radius-sm: 12px;
+      --pad: 20px;
+      --max: 1100px;
+
+      --accent: #c15f3c;   
+      --accent-2: #2e6b68; 
+      --accent-3: #364a8f; 
+      --accent-4: #7a5a2a; 
+      --accent-5: #7a3a62; 
+      --accent-6: #4c4c4c; 
+    }
+
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body {
+      margin: 0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      color: var(--ink);
+      background: radial-gradient(1100px 600px at 20% -10%, rgba(193, 95, 60, 0.10), transparent 55%),
+                  radial-gradient(900px 520px at 90% 0%, rgba(46, 107, 104, 0.10), transparent 50%),
+                  var(--bg);
+      line-height: 1.45;
+    }
+
+    a { color: inherit; }
+
+    .page {
+      width: min(var(--max), 100%);
+      margin: 0 auto;
+      padding: 28px var(--pad) 56px;
+    }
+
+    header {
+      display: grid;
+      gap: 12px;
+      padding: 18px 18px 0;
+    }
+
+    .eyebrow {
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(26px, 4.2vw, 40px);
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+    }
+
+    .subtitle {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+      max-width: 70ch;
+    }
+
+    .tip {
+      margin-top: 14px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 14px;
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.65);
+      border-radius: var(--radius-sm);
+      backdrop-filter: blur(6px);
+    }
+
+    .tip strong {
+      font-weight: 600;
+    }
+
+    .hero {
+      margin-top: 16px;
+      padding: 18px;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.72);
+      box-shadow: var(--shadow);
+    }
+
+    .hero-row {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 14px;
+      align-items: start;
+    }
+
+    .center {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 12px;
+      align-items: center;
+      padding: 14px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border);
+      background: var(--surface);
+    }
+
+    .center .icon {
+      width: 44px;
+      height: 44px;
+      display: grid;
+      place-items: center;
+      border-radius: 12px;
+      background: rgba(20, 20, 20, 0.06);
+      font-size: 22px;
+    }
+
+    .center .title {
+      display: grid;
+      gap: 2px;
+    }
+
+    .center .title b {
+      font-size: 14px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .center .title span {
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .grid {
+      margin-top: 16px;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+
+    .card {
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: var(--surface);
+      overflow: clip;
+    }
+
+    .card details {
+      border-radius: var(--radius);
+    }
+
+    .card details > .content {
+      display: none;
+    }
+
+    .card details[open] > .content {
+      display: grid;
+    }
+
+    .card summary {
+      list-style: none;
+      cursor: pointer;
+      padding: 16px 16px;
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      gap: 12px;
+      align-items: center;
+      user-select: none;
+    }
+
+    .card summary::-webkit-details-marker { display: none; }
+
+    .pill {
+      width: 44px;
+      height: 44px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      font-size: 22px;
+      background: rgba(20, 20, 20, 0.06);
+      border: 1px solid rgba(20, 20, 20, 0.08);
+    }
+
+    .card h2 {
+      margin: 0;
+      font-size: 15px;
+      line-height: 1.2;
+      letter-spacing: -0.01em;
+    }
+
+    .card .kicker {
+      display: block;
+      margin-top: 4px;
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .chev {
+      width: 34px;
+      height: 34px;
+      border-radius: 12px;
+      display: grid;
+      place-items: center;
+      border: 1px solid rgba(20, 20, 20, 0.10);
+      background: rgba(20, 20, 20, 0.04);
+      transition: transform 180ms ease;
+      color: rgba(20, 20, 20, 0.75);
+      font-size: 14px;
+    }
+
+    details[open] .chev { transform: rotate(180deg); }
+
+    .content {
+      padding: 0 16px 16px;
+      display: grid;
+      gap: 10px;
+    }
+
+    .content h3 {
+      margin: 8px 0 0;
+      font-size: 13px;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+      color: rgba(20, 20, 20, 0.85);
+    }
+
+    .list {
+      display: grid;
+      gap: 8px;
+      padding: 0;
+      margin: 0;
+      list-style: none;
+    }
+
+    .item {
+      padding: 10px 12px;
+      border-radius: 12px;
+      border: 1px solid rgba(20, 20, 20, 0.10);
+      background: rgba(20, 20, 20, 0.02);
+      display: grid;
+      gap: 2px;
+      font-size: 13px;
+    }
+
+    .item::before {
+      content: "";
+      height: 2px;
+      width: 18px;
+      border-radius: 999px;
+      background: var(--accent, #c15f3c);
+      opacity: 0.9;
+      margin-bottom: 4px;
+    }
+
+    .accent-1 { --accent: var(--accent-3); }
+    .accent-2 { --accent: #cc4e63; }
+    .accent-3 { --accent: #2b7da0; }
+    .accent-4 { --accent: #2e6b68; }
+    .accent-5 { --accent: #b07a2a; }
+    .accent-6 { --accent: #3a3a3a; }
+
+    .mindmap {
+      margin-top: 16px;
+      display: none; 
+    }
+
+    .map-frame {
+      position: relative;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.72);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      aspect-ratio: 12 / 8; 
+    }
+
+    .map-lines {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      opacity: 0.9;
+    }
+
+    .map-canvas {
+      position: relative;
+      width: 100%;
+      height: 100%;
+    }
+
+    .node {
+      position: absolute;
+      transform: translate(-50%, -50%);
+      width: 260px;
+      border-radius: 18px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      overflow: clip;
+      box-shadow: 0 10px 22px rgba(20, 20, 20, 0.10);
+      z-index: 1;
+    }
+
+    .node:hover,
+    .node:focus-within {
+      z-index: 5;
+    }
+
+    .node.center-node {
+      width: 320px;
+      border-radius: 22px;
+      background: rgba(255, 255, 255, 0.9);
+    }
+
+    .node details > .panel { display: none; }
+    .node details[open] > .panel { display: grid; }
+
+    .node summary {
+      list-style: none;
+      cursor: pointer;
+      user-select: none;
+      padding: 14px 14px;
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      gap: 12px;
+      align-items: center;
+    }
+    .node summary::-webkit-details-marker { display: none; }
+
+    .node .pill {
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
+      font-size: 20px;
+    }
+
+    .node .titleblock {
+      display: grid;
+      gap: 3px;
+      min-width: 0;
+    }
+    .node .titleblock b {
+      font-size: 13px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .node .titleblock span {
+      font-size: 12px;
+      color: var(--muted);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .node .panel {
+      padding: 0 14px 14px;
+      display: grid;
+      gap: 10px;
+    }
+
+    .node .panel h3 {
+      margin: 6px 0 0;
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(20, 20, 20, 0.78);
+    }
+
+    .node .list { gap: 8px; }
+    .node .item { font-size: 12.5px; }
+
+    .pos-center { left: 50%; top: 50%; }
+    .pos-1 { left: 50%; top: 28px; transform: translate(-50%, 0); }
+    .pos-2 { left: 85%; top: 28%; }
+    .pos-3 { left: 85%; top: 72%; }
+    .pos-4 { left: 50%; bottom: 28px; top: auto; transform: translateX(-50%); }
+    .pos-5 { left: 15%; top: 72%; }
+    .pos-6 { left: 15%; top: 28%; }
+
+    @media (min-width: 720px) {
+      header { padding: 22px 22px 0; }
+      .hero { padding: 22px; }
+
+      .hero-row {
+        grid-template-columns: 1.2fr 0.8fr;
+        align-items: center;
+      }
+
+      .grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 14px;
+      }
+
+      .mindmap { display: block; }
+      .grid { display: none; }
+    }
+
+    @media (min-width: 1024px) {
+      .grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 16px;
+      }
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+      .card:hover .chev { transform: rotate(180deg); }
+      .card:hover details:not([open]) > .content { display: grid; }
+
+      .node:hover details:not([open]) > .panel { display: grid; }
+      .node:hover .chev { transform: rotate(180deg); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .chev { transition: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header>
+      <div class="eyebrow">Mapa mental U2A1</div>
+      <h1>Educación online</h1>
+    </header>
+
+    <section class="mindmap" aria-label="Mapa mental">
+      <div class="map-frame">
+        <div class="map-canvas" aria-label="Canvas del mapa">
+          <!-- Centro -->
+          <div class="node center-node pos-center">
+          <div style="padding: 16px; display:grid; gap:10px;">
+            <div style="display:grid; grid-template-columns:auto 1fr; gap:12px; align-items:center;">
+              <div class="pill" aria-hidden="true" style="background: rgba(20,20,20,0.06);">🎓</div>
+              <div style="display:grid; gap:3px;">
+                <div style="font-weight: 650; letter-spacing: 0.06em; text-transform: uppercase; font-size: 13px;">Educación online</div>
+              </div>
+            </div>
+            <div style="color: var(--muted); font-size: 13px;">
+              Da click en cada tarjeta para expandir.
+            </div>
+          </div>
+          </div>
+
+          <!-- 1 -->
+          <div class="node accent-1 pos-1">
+          <details>
+            <summary>
+              <div class="pill" aria-hidden="true">📚</div>
+              <div class="titleblock">
+                <b>Programas</b>
+                <span>Educativos</span>
+              </div>
+              <div class="chev" aria-hidden="true">⌄</div>
+            </summary>
+            <div class="panel">
+              <h3>Modalidades virtuales</h3>
+              <ul class="list">
+                <li class="item">MOOC (Coursera, edX)</li>
+                <li class="item">Grados universitarios</li>
+                <li class="item">Certificaciones</li>
+                <li class="item">Plataformas E-Learning</li>
+              </ul>
+            </div>
+          </details>
+          </div>
+
+          <!-- 2 -->
+          <div class="node accent-2 pos-2">
+          <details>
+            <summary>
+              <div class="pill" aria-hidden="true">💻</div>
+              <div class="titleblock">
+                <b>Ventajas</b>
+                <span>Virtual</span>
+              </div>
+              <div class="chev" aria-hidden="true">⌄</div>
+            </summary>
+            <div class="panel">
+              <h3>Beneficios online</h3>
+              <ul class="list">
+                <li class="item">Flexibilidad horaria</li>
+                <li class="item">Acceso desde cualquier lugar</li>
+                <li class="item">Costos reducidos</li>
+                <li class="item">Autonomía del estudiante</li>
+              </ul>
+            </div>
+          </details>
+          </div>
+
+          <!-- 3 -->
+          <div class="node accent-3 pos-3">
+          <details>
+            <summary>
+              <div class="pill" aria-hidden="true">👨‍🎓</div>
+              <div class="titleblock">
+                <b>Rol</b>
+                <span>Estudiante</span>
+              </div>
+              <div class="chev" aria-hidden="true">⌄</div>
+            </summary>
+            <div class="panel">
+              <h3>Responsabilidades</h3>
+              <ul class="list">
+                <li class="item">Autogestión y disciplina</li>
+                <li class="item">Participación activa</li>
+                <li class="item">Competencias digitales</li>
+                <li class="item">Trabajo colaborativo</li>
+              </ul>
+            </div>
+          </details>
+          </div>
+
+          <!-- 4 -->
+          <div class="node accent-4 pos-4">
+          <details>
+            <summary>
+              <div class="pill" aria-hidden="true">👨‍🏫</div>
+              <div class="titleblock">
+                <b>Rol</b>
+                <span>Docente</span>
+              </div>
+              <div class="chev" aria-hidden="true">⌄</div>
+            </summary>
+            <div class="panel">
+              <h3>Funciones principales</h3>
+              <ul class="list">
+                <li class="item">Facilitador del aprendizaje</li>
+                <li class="item">Diseñador instruccional</li>
+                <li class="item">Mediador tecnológico</li>
+              </ul>
+            </div>
+          </details>
+          </div>
+
+          <!-- 5 -->
+          <div class="node accent-5 pos-5">
+          <details>
+            <summary>
+              <div class="pill" aria-hidden="true">🙋</div>
+              <div class="titleblock">
+                <b>Rol</b>
+                <span>Tutor</span>
+              </div>
+              <div class="chev" aria-hidden="true">⌄</div>
+            </summary>
+            <div class="panel">
+              <h3>Acompañamiento</h3>
+              <ul class="list">
+                <li class="item">Seguimiento personalizado</li>
+                <li class="item">Orientación académica</li>
+                <li class="item">Motivación constante</li>
+                <li class="item">Monitor de progreso</li>
+              </ul>
+            </div>
+          </details>
+          </div>
+
+          <!-- 6 -->
+          <div class="node accent-6 pos-6">
+          <details>
+            <summary>
+              <div class="pill" aria-hidden="true">🏫</div>
+              <div class="titleblock">
+                <b>Ventajas</b>
+                <span>Presencial</span>
+              </div>
+              <div class="chev" aria-hidden="true">⌄</div>
+            </summary>
+            <div class="panel">
+              <h3>Beneficios tradicionales</h3>
+              <ul class="list">
+                <li class="item">Interacción cara a cara</li>
+                <li class="item">Socialización directa</li>
+                <li class="item">Estructura y rutina</li>
+                <li class="item">Infraestructura física</li>
+              </ul>
+            </div>
+          </details>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <main class="grid" aria-label="Ramas">
+      <!-- 1 -->
+      <article class="card accent-1">
+        <details>
+          <summary>
+            <div class="pill" aria-hidden="true">📚</div>
+            <div>
+              <h2>Programas educativos</h2>
+              <span class="kicker">Modalidades virtuales</span>
+            </div>
+            <div class="chev" aria-hidden="true">⌄</div>
+          </summary>
+          <div class="content">
+            <h3>Modalidades virtuales</h3>
+            <ul class="list">
+              <li class="item">Coursera, edX</li>
+              <li class="item">Grados universitarios</li>
+              <li class="item">Certificaciones</li>
+              <li class="item">Plataformas E-Learning</li>
+            </ul>
+          </div>
+        </details>
+      </article>
+
+      <!-- 2 -->
+      <article class="card accent-2">
+        <details>
+          <summary>
+            <div class="pill" aria-hidden="true">✅</div>
+            <div>
+              <h2>Ventajas virtual</h2>
+              <span class="kicker">Beneficios online</span>
+            </div>
+            <div class="chev" aria-hidden="true">⌄</div>
+          </summary>
+          <div class="content">
+            <h3>Beneficios online</h3>
+            <ul class="list">
+              <li class="item">Flexibilidad horaria</li>
+              <li class="item">Acceso desde cualquier lugar</li>
+              <li class="item">Costos reducidos</li>
+              <li class="item">Autonomía del estudiante</li>
+            </ul>
+          </div>
+        </details>
+      </article>
+
+      <!-- 3 -->
+      <article class="card accent-3">
+        <details>
+          <summary>
+            <div class="pill" aria-hidden="true">👨‍🎓</div>
+            <div>
+              <h2>Rol del estudiante</h2>
+              <span class="kicker">Responsabilidades</span>
+            </div>
+            <div class="chev" aria-hidden="true">⌄</div>
+          </summary>
+          <div class="content">
+            <h3>Responsabilidades</h3>
+            <ul class="list">
+              <li class="item">Autogestión y disciplina</li>
+              <li class="item">Participación activa</li>
+              <li class="item">Competencias digitales</li>
+              <li class="item">Trabajo colaborativo</li>
+            </ul>
+          </div>
+        </details>
+      </article>
+
+      <!-- 4 -->
+      <article class="card accent-4">
+        <details>
+          <summary>
+            <div class="pill" aria-hidden="true">👨‍🏫</div>
+            <div>
+              <h2>Rol del docente</h2>
+              <span class="kicker">Funciones principales</span>
+            </div>
+            <div class="chev" aria-hidden="true">⌄</div>
+          </summary>
+          <div class="content">
+            <h3>Funciones principales</h3>
+            <ul class="list">
+              <li class="item">Facilitador del aprendizaje</li>
+              <li class="item">Diseñador instruccional</li>
+              <li class="item">Mediador tecnológico</li>
+            </ul>
+          </div>
+        </details>
+      </article>
+
+      <!-- 5 -->
+      <article class="card accent-5">
+        <details>
+          <summary>
+            <div class="pill" aria-hidden="true">🎯</div>
+            <div>
+              <h2>Rol del tutor</h2>
+              <span class="kicker">Acompañamiento</span>
+            </div>
+            <div class="chev" aria-hidden="true">⌄</div>
+          </summary>
+          <div class="content">
+            <h3>Acompañamiento</h3>
+            <ul class="list">
+              <li class="item">Seguimiento personalizado</li>
+              <li class="item">Orientación académica</li>
+              <li class="item">Motivación constante</li>
+              <li class="item">Monitor de progreso</li>
+            </ul>
+          </div>
+        </details>
+      </article>
+
+      <!-- 6 -->
+      <article class="card accent-6">
+        <details>
+          <summary>
+            <div class="pill" aria-hidden="true">🏫</div>
+            <div>
+              <h2>Ventajas presencial</h2>
+              <span class="kicker">Beneficios tradicionales</span>
+            </div>
+            <div class="chev" aria-hidden="true">⌄</div>
+          </summary>
+          <div class="content">
+            <h3>Beneficios tradicionales</h3>
+            <ul class="list">
+              <li class="item">Interacción cara a cara</li>
+              <li class="item">Socialización directa</li>
+              <li class="item">Estructura y rutina</li>
+              <li class="item">Infraestructura física</li>
+            </ul>
+          </div>
+        </details>
+      </article>
+    </main>
+  </div>
+</body>
+</html>
+
